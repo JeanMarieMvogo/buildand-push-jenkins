@@ -1,6 +1,6 @@
 node {
 
-   def registryProjet='quenec/'
+   def registryProjet='localhost:5000/'
    def IMAGE="${registryProjet}jenkins:versionJenkins-${env.BUILD_ID}"
 
     stage('Clone') {
@@ -18,7 +18,7 @@ node {
     }
 
     stage('Push') {
-          docker.withRegistry('https://registry.hub.docker.com', 'docker_hub') {
+          docker.withRegistry('https://${registryProjet}', 'user_id') {
               img.push 'latest'
               img.push()
           }
